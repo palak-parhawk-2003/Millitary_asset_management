@@ -6,7 +6,9 @@ const Base = require("./models/Base");
 require("dotenv").config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "https://millitary-frontend.onrender.com/"
+}));
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -38,9 +40,9 @@ app.use("/api/assignments", assignmentRoutes);
 app.use("/api/expenditures", expenditureRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 
-app.listen(process.env.PORT || 5000, async () => {
+app.listen(process.env.PORT || 4000, async () => {
   await ensureBasesExist();
-  console.log(`Server is running on port ${process.env.PORT || 5000}`);
+  console.log(`Server is running on port ${process.env.PORT || 4000}`);
 });
 
 async function ensureBasesExist() {
