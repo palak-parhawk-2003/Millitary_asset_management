@@ -7,7 +7,7 @@ require("dotenv").config();
 
 const app = express();
 app.use(cors({
-  origin: "https://millitary-frontend.onrender.com/"
+  origin: "https://millitary-asset-management-five.vercel.app/"
 }));
 app.use(express.json());
 
