@@ -6,8 +6,12 @@ const Base = require("./models/Base");
 require("dotenv").config();
 
 const app = express();
+// app.use(cors({
+//   origin: "https://millitary-asset-management-five.vercel.app/"
+// }));
 app.use(cors({
-  origin: "https://millitary-asset-management-five.vercel.app/"
+  origin: "https://millitary-asset-management-five.vercel.app/", 
+  credentials: true 
 }));
 app.use(express.json());
 
