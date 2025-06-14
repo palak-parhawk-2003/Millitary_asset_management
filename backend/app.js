@@ -38,6 +38,7 @@ const transferRoutes = require("./routes/transferRoutes");
 const assignmentRoutes = require("./routes/assignmentRoutes");
 const expenditureRoutes = require("./routes/expenditureRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
+const baseRoutes = require("./routes/baseRoutes");
 
 app.use("/api/auth", authRoutes);
 app.use("/api/assets", assetRoutes);
@@ -46,6 +47,7 @@ app.use("/api/transfers", transferRoutes);
 app.use("/api/assignments", assignmentRoutes);
 app.use("/api/expenditures", expenditureRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/bases", baseRoutes);
 
 app.listen(process.env.PORT || 4000, async () => {
   await ensureBasesExist();

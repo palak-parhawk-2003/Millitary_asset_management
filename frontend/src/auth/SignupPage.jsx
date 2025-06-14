@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useAuth } from "./AuthContext";
 import { Link } from "react-router-dom";
+import axios from "../api/axios";
+import { useEffect } from "react";
 
 function SignupPage() {
   const { signup } = useAuth();
@@ -8,10 +10,11 @@ function SignupPage() {
     name: "",
     email: "",
     password: "",
-    role: "BaseCommander", // default
+    role: "", 
     base: "",
   });
   const [error, setError] = useState("");
+  const [bases, setBases] = useState([]);
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -19,6 +22,18 @@ function SignupPage() {
       [e.target.name]: e.target.value,
     }));
   };
+
+  useEffect(() => {
+    const fetchBases = async () => {
+      try{
+        const res = await axios.get("/bases/names");
+        setBases(res.data);
+      } catch (e) {
+        console.error("Failed to fetch base names: ", e);
+      }
+    };
+    fetchBases();
+  })
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -74,14 +89,18 @@ function SignupPage() {
             <option value="BaseCommander">Base Commander</option>
             <option value="LogisticsOfficer">Logistics Officer</option>
           </select>
-          <input
-            name="base"
-            placeholder="Base ID (for now enter manually)"
-            className="w-full p-2 border rounded"
-            value={formData.base}
-            onChange={handleChange}
-            required
-          />
+          <select name="base"
+          value={formData.base}
+          onChange={handleChange}
+          className="w-full mb-4 border p-2 rounded"
+        >
+          <option value="">All Bases</option>
+          {bases.map((b) => (
+            <option key={b._id} value={b.name}>
+              {b.name}
+            </option>
+          ))}
+        </select>
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
