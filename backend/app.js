@@ -10,7 +10,7 @@ const app = express();
 //   origin: "https://millitary-asset-management-five.vercel.app/"
 // }));
 app.use(cors({
-  origin: "https://millitary-asset-management-five.vercel.app/api/",
+  origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true, // only if using cookies/auth
