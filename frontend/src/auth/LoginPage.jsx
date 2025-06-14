@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "./AuthContext";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   const { login } = useAuth();
@@ -46,7 +47,8 @@ const LoginPage = () => {
       />
       <button type="submit">Login</button>
       <p>
-        Don't have an account? <a href="/register">Register</a>
+        
+        Don't have an account? <Link to="/register">Register</Link>
       </p>
     </form>
   );
