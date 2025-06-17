@@ -85,7 +85,7 @@ function SignupPage() {
             onChange={handleChange}
             required
           >
-            <option value="Admin">Admin</option>
+            {/* <option value="Admin">Admin</option> */}
             <option value="BaseCommander">Base Commander</option>
             <option value="LogisticsOfficer">Logistics Officer</option>
           </select>
