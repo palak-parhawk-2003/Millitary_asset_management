@@ -10,7 +10,7 @@ function SignupPage() {
     name: "",
     email: "",
     password: "",
-    role: "", 
+    role: "",
     base: "",
   });
   const [error, setError] = useState("");
@@ -25,7 +25,7 @@ function SignupPage() {
 
   useEffect(() => {
     const fetchBases = async () => {
-      try{
+      try {
         const res = await axios.get("/bases/names");
         setBases(res.data);
       } catch (e) {
@@ -85,22 +85,26 @@ function SignupPage() {
             onChange={handleChange}
             required
           >
-            {/* <option value="Admin">Admin</option> */}
+            <option value="Admin">Admin</option>
             <option value="BaseCommander">Base Commander</option>
             <option value="LogisticsOfficer">Logistics Officer</option>
           </select>
-          <select name="base"
-          value={formData.base}
-          onChange={handleChange}
-          className="w-full mb-4 border p-2 rounded"
-        >
-          <option value="">All Bases</option>
-          {bases.map((b) => (
-            <option key={b._id} value={b.name}>
-              {b.name}
-            </option>
-          ))}
-        </select>
+          {formData.role !== "Admin" && (
+            <select
+              name="base"
+              value={formData.base}
+              onChange={handleChange}
+              className="w-full mb-4 border p-2 rounded"
+            >
+              <option value="">Select Base</option>
+              {bases.map((b) => (
+                <option key={b._id} value={b.name}>
+                  {b.name}
+                </option>
+              ))}
+            </select>
+          )}
+
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"

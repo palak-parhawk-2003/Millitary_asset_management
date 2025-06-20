@@ -10,8 +10,12 @@ exports.register = async (req, res) => {
     if (!name || !email || !password || !role || !base) {
       return res.status(400).json({ message: "All fields are required" });
     }
-    const baseModel = await Base.findOne({ name: base });
-    if (!baseModel) return res.status(400).json({ error: "Base not found" });
+    let baseModel = null;
+    if(role !== "Admin"){
+      if (!base) return res.status(400).json({ message: "Base is required for non-admin users" });
+      baseModel = await Base.findOne({ name: base });
+      if (!baseModel) return res.status(400).json({ message: "Base not found" });
+    }
 
     // Checking if user already exists
     const existingUser = await User.findOne({ email });
